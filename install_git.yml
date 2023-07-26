@@ -1,0 +1,53 @@
+---
+- name: Install Git on Linux
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Check Git Installation
+      command: which git
+      register: git_path
+      ignore_errors: yes
+
+    - name: Display Git Installation Status
+      debug:
+        msg: "Git is installed at {{ git_path.stdout }}" # If Git is installed
+      when: git_path.rc == 0
+
+    - name: Display Git Installation Status
+      debug:
+        msg: "Git is not installed on this system" # If Git is not installed
+      when: git_path.rc != 0
+
+    - name: Update package cache (Ubuntu/Debian)
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+      when: git_path.rc != 0
+
+    - name: Install Git (Ubuntu/Debian)
+      apt:
+        name: git
+        state: present
+      when: ansible_os_family == 'Debian'
+      when: git_path.rc != 0
+
+    - name: Update package cache (RedHat/CentOS)
+      yum:
+        name: epel-release
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install Git (RedHat/CentOS)
+      yum:
+        name: git
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Get Git Version
+      command: git --version
+      register: git_version_output
+
+    - name: Display Git Version
+      debug:
+        msg: "Git Version: {{ git_version_output.stdout }}"

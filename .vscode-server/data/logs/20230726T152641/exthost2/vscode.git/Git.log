@@ -1,0 +1,48 @@
+2023-07-26 15:27:59.838 [info] Log level: Info
+2023-07-26 15:27:59.838 [info] Validating found git in: "git"
+2023-07-26 15:27:59.838 [info] Using git "2.17.1" from "git"
+2023-07-26 15:27:59.838 [info] > git rev-parse --show-toplevel [42ms]
+2023-07-26 15:27:59.838 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:27:59.838 [info] > git rev-parse --show-toplevel [18ms]
+2023-07-26 15:27:59.838 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:27:59.838 [info] > git rev-parse --show-toplevel [8ms]
+2023-07-26 15:27:59.838 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:27:59.838 [info] > git rev-parse --show-toplevel [14ms]
+2023-07-26 15:27:59.838 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:27:59.841 [info] > git rev-parse --show-toplevel [28ms]
+2023-07-26 15:27:59.841 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:27:59.892 [info] > git rev-parse --show-toplevel [16ms]
+2023-07-26 15:27:59.892 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:28:27.926 [info] > git rev-parse --show-toplevel [4ms]
+2023-07-26 15:28:27.926 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:28:41.829 [info] > git rev-parse --show-toplevel [4ms]
+2023-07-26 15:28:41.829 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:28:52.165 [info] > git rev-parse --show-toplevel [2ms]
+2023-07-26 15:28:52.165 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:35:08.070 [info] > git rev-parse --show-toplevel [32ms]
+2023-07-26 15:35:08.072 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:35:51.382 [info] > git rev-parse --show-toplevel [17ms]
+2023-07-26 15:35:51.382 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:36:08.239 [info] > git rev-parse --show-toplevel [14ms]
+2023-07-26 15:36:08.239 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:38:18.221 [info] > git rev-parse --show-toplevel [3ms]
+2023-07-26 15:38:18.221 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 15:38:20.280 [info] > git rev-parse --show-toplevel [5ms]
+2023-07-26 15:38:20.280 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 16:00:49.016 [info] > git rev-parse --show-toplevel [3ms]
+2023-07-26 16:00:49.016 [info] fatal: not a git repository (or any of the parent directories): .git
+2023-07-26 16:01:08.476 [info] > git rev-parse --show-toplevel [5ms]
+2023-07-26 16:01:08.484 [info] > git rev-parse --git-dir --git-common-dir [2ms]
+2023-07-26 16:01:08.501 [info] Open repository: /home/vagrant/Ansible_Learning
+2023-07-26 16:01:08.523 [info] > git config --get commit.template [14ms]
+2023-07-26 16:01:08.524 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [7ms]
+2023-07-26 16:01:08.546 [info] > git status -z -uall [13ms]
+2023-07-26 16:01:08.574 [info] > git config --get commit.template [10ms]
+2023-07-26 16:01:08.581 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [9ms]
+2023-07-26 16:01:08.593 [info] > git status -z -uall [7ms]
+2023-07-26 16:01:08.981 [info] > git rev-parse --show-toplevel [4ms]
+2023-07-26 16:01:09.088 [info] > git check-ignore -v -z --stdin [4ms]
+2023-07-26 16:01:09.865 [info] > git config --get commit.template [9ms]
+2023-07-26 16:01:09.868 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [4ms]
+2023-07-26 16:01:09.878 [info] > git status -z -uall [5ms]
+2023-07-26 16:01:23.162 [info] > git check-ignore -v -z --stdin [4ms]

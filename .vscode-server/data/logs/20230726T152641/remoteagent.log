@@ -1,0 +1,38 @@
+2023-07-26 15:26:42.126 [info] 
+
+
+
+
+2023-07-26 15:26:42.126 [info] Extension host agent started.
+2023-07-26 15:26:42.221 [info] Started initializing default profile extensions in extensions installation folder. file:///home/vagrant/.vscode-server/extensions
+2023-07-26 15:26:42.294 [info] [127.0.0.1][0bff8a7f][ManagementConnection] New connection established.
+2023-07-26 15:26:42.306 [info] [127.0.0.1][b06fda64][ExtensionHostConnection] New connection established.
+2023-07-26 15:26:42.366 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/vagrant/.vscode-server/extensions
+2023-07-26 15:26:42.662 [info] [127.0.0.1][b06fda64][ExtensionHostConnection] <4952> Launched Extension Host Process.
+2023-07-26 15:27:42.375 [info] [127.0.0.1][0bff8a7f][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2023-07-26 15:27:42.520 [info] [127.0.0.1][b06fda64][ExtensionHostConnection] <4952> Extension Host Process exited with code: 0, signal: null.
+2023-07-26 15:27:42.520 [info] Cancelling previous shutdown timeout
+2023-07-26 15:27:42.521 [info] Last EH closed, waiting before shutting down
+2023-07-26 15:27:53.216 [info] Got delay-shutdown request while in shutdown timeout, delaying
+2023-07-26 15:27:53.216 [info] Cancelling previous shutdown timeout
+2023-07-26 15:27:53.334 [info] [127.0.0.1][d136c6e6][ManagementConnection] New connection established.
+2023-07-26 15:27:53.341 [info] [127.0.0.1][17aca351][ExtensionHostConnection] New connection established.
+2023-07-26 15:27:53.350 [info] [127.0.0.1][17aca351][ExtensionHostConnection] <5184> Launched Extension Host Process.
+2023-07-26 15:27:57.148 [error] CodeExpectedError: Could not find pty on pty host
+    at g.O (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:28:7243)
+    at g.updateTitle (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:28:2685)
+    at g.Q.<computed> (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:27:22460)
+    at Object.call (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:17:4866)
+    at u.s (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:15:5150)
+    at u.q (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:15:4661)
+    at i.value (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:15:4066)
+    at E.w (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:10:1902)
+    at E.fire (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:10:2119)
+    at process.G (/home/vagrant/.vscode-server/bin/74f6148eb9ea00507ec113ec51c489d6ffb4b771/out/vs/platform/terminal/node/ptyHostMain.js:8:27085)
+    at process.emit (node:events:513:28)
+    at emit (node:internal/child_process:939:14)
+    at processTicksAndRejections (node:internal/process/task_queues:84:21)
+2023-07-26 15:32:53.218 [info] New EH opened, aborting shutdown
+2023-07-26 17:54:31.318 [info] [127.0.0.1][0bbc2083][ManagementConnection] New connection established.
+2023-07-26 17:54:31.323 [info] [127.0.0.1][b4f654cd][ExtensionHostConnection] New connection established.
+2023-07-26 17:54:31.333 [info] [127.0.0.1][b4f654cd][ExtensionHostConnection] <25182> Launched Extension Host Process.
