@@ -2,9 +2,9 @@
 - name: Example Playbook
   hosts: localhost
   connection: local
-  vars:
-    log_date: "{{ log_date }}"
-    log_month: "{{ log_month }}"
+  # vars:
+  #   log_date: "{{ log_date }}"
+  #   log_month: "{{ log_month }}"
   tasks:
     - name: Print log date and month
       debug:
