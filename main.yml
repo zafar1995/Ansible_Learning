@@ -1,0 +1,10 @@
+---
+- name: Example Playbook
+  hosts: all
+  vars:
+    log_date: "{{ log_date }}"
+    log_month: "{{ log_month }}"
+  tasks:
+    - name: Print log date and month
+      debug:
+        msg: "Log Date: {{ log_date }}, Log Month: {{ log_month }}"
