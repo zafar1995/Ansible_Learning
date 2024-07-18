@@ -32,5 +32,5 @@ jobs:
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook -i inventory.yml main.yml -e "log_date=${{ github.event.inputs.log_date }} log_month=${{ github.event.inputs.log_month }}"
+        ansible-playbook main.yml -e "log_date=${{ github.event.inputs.log_date }} log_month=${{ github.event.inputs.log_month }}"
 
