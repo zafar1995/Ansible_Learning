@@ -1,6 +1,7 @@
 ---
 - name: Example Playbook
-  hosts: all
+  hosts: localhost
+  connection: local
   vars:
     log_date: "{{ log_date }}"
     log_month: "{{ log_month }}"
