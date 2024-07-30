@@ -25,7 +25,7 @@ jobs:
       #   run: npm run build
 
       - name: Zip the folder
-        run: zip -r output.zip ${{ github.workspace }}/Ansible_Learning
+        run: zip -r output.zip ${{ github.workspace }}
 
       - name: Upload to SharePoint
         env:
