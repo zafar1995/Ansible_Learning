@@ -38,7 +38,7 @@ jobs:
           SHAREPOINT_USERNAME: ${{ secrets.SHAREPOINT_USERNAME }}
           SHAREPOINT_PASSWORD: ${{ secrets.SHAREPOINT_PASSWORD }}
         run: |
-          FILE_PATH="output.zip"
+          FILE_PATH="${{ github.workspace }}/output.zip"
           SHAREPOINT_DEST_PATH="/Shared Documents/output.zip"
           curl -k -X POST -H "Content-Type: multipart/form-data" \
           --user "$SHAREPOINT_USERNAME:$SHAREPOINT_PASSWORD" \
