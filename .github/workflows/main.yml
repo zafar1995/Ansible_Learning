@@ -27,6 +27,11 @@ jobs:
       - name: Zip the folder
         run: zip -r output.zip ${{ github.workspace }}
 
+      - name: run the cmd
+        run: |
+          ls -ltr
+          pwd
+
       - name: Upload to SharePoint
         env:
           SHAREPOINT_URL: ${{ secrets.SHAREPOINT_URL }}
