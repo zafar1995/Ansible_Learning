@@ -31,14 +31,14 @@ jobs:
         run: |
           ls -ltr
           pwd
-      - name: Debugging environment variables
-        run: |
-          SHAREPOINTURL: ${{ secrets.SHAREPOINT_URL }}
-          echo $SHAREPOINTURL
-          SHAREPOINTUSERNAME: ${{ secrets.SHAREPOINT_USERNAME }}
-          echo $SHAREPOINTUSERNAME
-          SHAREPOINTPASSWORD: ${{ secrets.SHAREPOINT_PASSWORD }}
-          echo $SHAREPOINTPASSWORD
+      # - name: Debugging environment variables
+      #   run: |
+      #     SHAREPOINTURL: ${{ secrets.SHAREPOINT_URL }}
+      #     echo $SHAREPOINTURL
+      #     SHAREPOINTUSERNAME: ${{ secrets.SHAREPOINT_USERNAME }}
+      #     echo $SHAREPOINTUSERNAME
+      #     SHAREPOINTPASSWORD: ${{ secrets.SHAREPOINT_PASSWORD }}
+      #     echo $SHAREPOINTPASSWORD
 
 
       - name: Upload to SharePoint
