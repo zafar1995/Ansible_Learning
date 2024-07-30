@@ -13,16 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js (if needed)
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+      # - name: Set up Node.js (if needed)
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '16'
 
-      - name: Install dependencies (if needed)
-        run: npm install
+      # - name: Install dependencies (if needed)
+      #   run: npm install
 
-      - name: Build project (if needed)
-        run: npm run build
+      # - name: Build project (if needed)
+      #   run: npm run build
 
       - name: Zip the folder
         run: zip -r output.zip .github\workflows\main.yml
