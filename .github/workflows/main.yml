@@ -43,9 +43,9 @@ jobs:
 
       - name: Upload to SharePoint
         env:
-          SHAREPOINT_URL: ${{ secrets.SHAREPOINT_URL }}
-          SHAREPOINT_USERNAME: ${{ secrets.SHAREPOINT_USERNAME }}
-          SHAREPOINT_PASSWORD: ${{ secrets.SHAREPOINT_PASSWORD }}
+          SHAREPOINT_URL: "${{ secrets.SHAREPOINT_URL }}"
+          SHAREPOINT_USERNAME: "${{ secrets.SHAREPOINT_USERNAME }}"
+          SHAREPOINT_PASSWORD: "${{ secrets.SHAREPOINT_PASSWORD }}"
         run: |
           FILE_PATH="${{ github.workspace }}/output.zip"
           SHAREPOINT_DEST_PATH="/Shared Documents/output.zip"
