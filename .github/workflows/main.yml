@@ -30,6 +30,7 @@ jobs:
         
       - name: Upload to SharePoint
         env:
+          SHAREPOINT_URL: "${{ github.event.inputs.URL }}"
           SHAREPOINT_USERNAME: "${{ secrets.SHAREPOINT_USERNAME }}"
           SHAREPOINT_PASSWORD: "${{ secrets.SHAREPOINT_PASSWORD }}"
         run: |
