@@ -7,6 +7,14 @@ on:
         description: 'Enter the URL'
         required: true
         type: string
+      Username:
+        description: 'Enter the Username'
+        required: true
+        type: string
+      Password:
+        description: 'Enter the Password'
+        required: true
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,13 +34,18 @@ jobs:
       - name: setting SHAREPOINT_URL
         env:
           SHAREPOINT_URL: "${{ github.event.inputs.URL }}"
-        run: echo "$SHAREPOINT_URL"
+          SHAREPOINT_USERNAME: "${{ github.event.inputs.Username }}"
+          SHAREPOINT_PASSWORD: "${{ github.event.inputs.Password }}"
+        run: |
+          echo "$SHAREPOINT_URL"
+          echo "$SHAREPOINT_USERNAME"
+          echo "$SHAREPOINT_PASSWORD"
         
       - name: Upload to SharePoint
         env:
           SHAREPOINT_URL: "${{ github.event.inputs.URL }}"
-          SHAREPOINT_USERNAME: "${{ secrets.SHAREPOINT_USERNAME }}"
-          SHAREPOINT_PASSWORD: "${{ secrets.SHAREPOINT_PASSWORD }}"
+          SHAREPOINT_USERNAME: "${{ github.event.inputs.Username }}"
+          SHAREPOINT_PASSWORD: "${{ github.event.inputs.Password }}"
         run: |
           FILE_PATH="${{ github.workspace }}/output.zip"
           SHAREPOINT_DEST_PATH="/Shared Documents/output.zip"
