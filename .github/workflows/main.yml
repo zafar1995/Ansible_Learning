@@ -26,6 +26,7 @@ jobs:
       - name: setting SHAREPOINT_URL
         env:
           SHAREPOINT_URL: "${{ github.event.inputs.URL }}"
+        run: echo "$SHAREPOINT_URL"
         
       - name: Upload to SharePoint
         env:
