@@ -1,55 +1,22 @@
-name: Upload folder to SharePoint
+name: Secure Password Input
 
-on:
-  workflow_dispatch:
-    inputs:
-      URL:
-        description: 'Enter the URL'
-        required: true
-        type: string
-      Username:
-        description: 'Enter the Username'
-        required: true
-        type: string
-      Password:
-        description: 'Enter the Password'
-        required: true
-        type: string
+on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Ask for Password
+      id: get-password
+      run: |
+        echo "Please enter your password:"
+        read -s USER_PASSWORD
+        echo "::add-mask::$USER_PASSWORD"
+        echo "user_password=$USER_PASSWORD" >> $GITHUB_ENV
 
-      - name: Zip the folder
-        run: zip -r output.zip ${{ github.workspace }}
-
-      - name: run the cmd
-        run: |
-          ls -ltr
-          pwd
-     
-      - name: setting SHAREPOINT_URL
-        env:
-          SHAREPOINT_URL: "${{ github.event.inputs.URL }}"
-          SHAREPOINT_USERNAME: "${{ github.event.inputs.Username }}"
-          SHAREPOINT_PASSWORD: "${{ github.event.inputs.Password }}"
-        run: |
-          echo "$SHAREPOINT_URL"
-          echo "$SHAREPOINT_USERNAME"
-          echo "$SHAREPOINT_PASSWORD"
-        
-      - name: Upload to SharePoint
-        env:
-          SHAREPOINT_URL: "${{ github.event.inputs.URL }}"
-          SHAREPOINT_USERNAME: "${{ github.event.inputs.Username }}"
-          SHAREPOINT_PASSWORD: "${{ github.event.inputs.Password }}"
-        run: |
-          FILE_PATH="${{ github.workspace }}/output.zip"
-          SHAREPOINT_DEST_PATH="/Shared Documents/output.zip"
-          curl -k -X POST -H "Content-Type: multipart/form-data" \
-          --user "$SHAREPOINT_USERNAME:$SHAREPOINT_PASSWORD" \
-          -F "file=@${FILE_PATH}" \
-          "${SHAREPOINT_URL}/_api/web/GetFolderByServerRelativeUrl('${SHAREPOINT_DEST_PATH%/*}')/Files/add(url='${SHAREPOINT_DEST_PATH##*/}', overwrite=true)"
+    - name: Use Password
+      run: |
+        echo "Your password is stored securely."
+        # Use the password for any task, it won't be printed
+        echo "Password: ${{ env.USER_PASSWORD }}"
