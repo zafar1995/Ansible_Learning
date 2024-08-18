@@ -1,6 +1,12 @@
 name: Secure Password Input
 
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      USER_PASSWORD:
+        description: "Enter your input"
+        required: true
+        default: "default_value"
 
 jobs:
   build:
