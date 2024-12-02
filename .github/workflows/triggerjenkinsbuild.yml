@@ -16,3 +16,4 @@ jobs:
           jenkins-token: bf0ca22f35774571aa00714e200bd3d7
           job-name: test
           job-params: '{}'
+          crumb: b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274
