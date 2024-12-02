@@ -19,6 +19,13 @@ jobs:
           job-params: '{}'
           crumb: b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274
 
+      - name: "Print Build Result"
+        run: |
+          QUEUE_URL=$(curl -s -u admin:11907918e0c537391eb03f30620b0ca9c9 \
+            https://0ed5-103-167-176-239.ngrok-free.app/job/test/api/json | jq -r '.lastBuild.queueId')
+          
+          echo "Queue ID: $QUEUE_URL"
+          
       - name: "Wait for Jenkins Build to Complete"
         id: wait-for-build
         run: |
@@ -39,5 +46,4 @@ jobs:
             ${BUILD_URL}/api/json | jq -r '.result')
           echo "BUILD_RESULT=$BUILD_RESULT" >> $GITHUB_ENV
       
-      # - name: "Print Build Result"
-      #   run: echo "Jenkins Build Result: ${{ env.BUILD_RESULT }}"
+
