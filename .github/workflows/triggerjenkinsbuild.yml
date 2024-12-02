@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: self-runner-node
+    runs-on: ubuntu-latest
     steps:
       - name: "Trigger jenkins job"
         uses: umutcolak/jenkins-trigger-job@main
