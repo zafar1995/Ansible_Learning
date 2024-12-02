@@ -17,3 +17,15 @@ jobs:
           job-name: test
           job-params: '{}'
           crumb: b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274
+      
+      - name: Get Jenkins Build Result
+        env:
+          JENKINS_URL: https://0ed5-103-167-176-239.ngrok-free.app/
+          JENKINS_USER: admin
+          JENKINS_TOKEN: bf0ca22f35774571aa00714e200bd3d7
+        run: |
+          RESULT=$(curl -s -u $JENKINS_USER:$JENKINS_TOKEN $JENKINS_URL | jq -r '.result')
+          echo "Jenkins build result: $RESULT"
+          if [ "$RESULT" != "SUCCESS" ]; then
+            exit 1
+          fi
