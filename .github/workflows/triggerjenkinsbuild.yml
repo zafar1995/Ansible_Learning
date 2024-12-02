@@ -43,5 +43,5 @@ jobs:
 
           echo "BUILD_RESULT=$BUILD_RESULT" >> $GITHUB_ENV
 
-      - name: "Print Build Result"
-        run: echo "Jenkins Build Result: ${{ env.BUILD_RESULT }}"
+      # - name: "Print Build Result"
+      #   run: echo "Jenkins Build Result: ${{ env.BUILD_RESULT }}"
