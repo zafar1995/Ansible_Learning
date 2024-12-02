@@ -21,11 +21,14 @@ jobs:
 
       - name: "Print Build Result"
         run: |
+          BUILD_TRIGGER_RESPONSE=$(curl -s -u admin:11907918e0c537391eb03f30620b0ca9c9 \
+            -X POST "https://0ed5-103-167-176-239.ngrok-free.app/job/test/buildWithParameters?token=bf0ca22f35774571aa00714e200bd3d7")
+
           QUEUE_URL=$(curl -s -u admin:11907918e0c537391eb03f30620b0ca9c9 \
-            https://0ed5-103-167-176-239.ngrok-free.app/job/test/api/json | jq -r '.lastBuild.queueId')
+            https://0ed5-103-167-176-239.ngrok-free.app/queue/api/json | jq -r '.items[0].queueId')
           
           echo "Queue ID: $QUEUE_URL"
-          
+         
       - name: "Wait for Jenkins Build to Complete"
         id: wait-for-build
         run: |
