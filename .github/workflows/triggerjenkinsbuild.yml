@@ -10,26 +10,24 @@ jobs:
     steps:
       - name: "Trigger Jenkins job"
         id: trigger-job
-        uses: umutcolak/jenkins-trigger-job@main
-        with:
-          jenkins-url: https://0ed5-103-167-176-239.ngrok-free.app/
-          user: admin
-          jenkins-token: bf0ca22f35774571aa00714e200bd3d7
-          job-name: test
-          job-params: '{}'
-          crumb: b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274
+        run: |
+          RESPONSE=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+            -X POST https://0ed5-103-167-176-239.ngrok-free.app/job/test/build?token=bf0ca22f35774571aa00714e200bd3d7 \
+            -i)
+          QUEUE_ID=$(echo "$RESPONSE" | grep -oP '(?<=Location: .*/queue/item/)\d+')
+          if [ -z "$QUEUE_ID" ]; then
+            echo "Failed to retrieve queue ID"
+            exit 1
+          fi
+          echo "QUEUE_ID=$QUEUE_ID" >> $GITHUB_ENV
+          echo "Queue ID: $QUEUE_ID"
 
       - name: "Get Build Number"
         id: get-build-number
         run: |
-          # Fetch the queue item and get the executable (build number)
-          QUEUE_URL=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-            https://0ed5-103-167-176-239.ngrok-free.app/job/test/api/json | jq -r '.lastBuild.queueId')
-          echo "Queue ID: $QUEUE_URL"
-
           while true; do
             BUILD_NUMBER=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-              https://0ed5-103-167-176-239.ngrok-free.app/queue/item/$QUEUE_URL/api/json | jq -r '.executable.number')
+              https://0ed5-103-167-176-239.ngrok-free.app/queue/item/${{ env.QUEUE_ID }}/api/json | jq -r '.executable.number')
 
             if [ "$BUILD_NUMBER" != "null" ]; then
               echo "Build Number: $BUILD_NUMBER"
@@ -46,7 +44,6 @@ jobs:
           BUILD_URL="https://0ed5-103-167-176-239.ngrok-free.app/job/test/$BUILD_NUMBER"
           echo "Build URL: $BUILD_URL"
 
-          # Poll the build status until it's completed
           while true; do
             BUILD_STATUS=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
               ${BUILD_URL}/api/json | jq -r '.building')
