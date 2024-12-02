@@ -13,6 +13,6 @@ jobs:
         with:
           jenkins-url: http://localhost:8080/
           user: admin
-          jenkins-token: 11fbcd5c331b21367375370ef253153afe
+          jenkins-token: bf0ca22f35774571aa00714e200bd3d7
           job-name: test
           job-params: '{}'
