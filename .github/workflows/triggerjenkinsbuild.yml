@@ -14,7 +14,7 @@ jobs:
         with:
           jenkins-url: https://0ed5-103-167-176-239.ngrok-free.app/
           user: admin
-          jenkins-token: bf0ca22f35774571aa00714e200bd3d7
+          jenkins-token: 11907918e0c537391eb03f30620b0ca9c9
           job-name: test
           job-params: '{}'
           crumb: b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274
@@ -22,12 +22,12 @@ jobs:
       - name: "Wait for Jenkins Build to Complete"
         id: wait-for-build
         run: |
-          BUILD_URL=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+          BUILD_URL=$(curl -s -u admin:11907918e0c537391eb03f30620b0ca9c9 \
             https://0ed5-103-167-176-239.ngrok-free.app/job/test/lastBuild/api/json | jq -r '.url')
           echo "Build URL: $BUILD_URL"
           # # Poll the build status until it's completed
           # while true; do
-          #   BUILD_STATUS=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+          #   BUILD_STATUS=$(curl -s -u admin:11907918e0c537391eb03f30620b0ca9c9 \
           #     ${BUILD_URL}/api/json | jq -r '.building')
           #   if [ "$BUILD_STATUS" == "false" ]; then
           #     break
@@ -35,7 +35,7 @@ jobs:
           #   echo "Build is still running..."
           #   sleep 10
           # done
-          BUILD_RESULT=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+          BUILD_RESULT=$(curl -s -u admin:11907918e0c537391eb03f30620b0ca9c9 \
             ${BUILD_URL}/api/json | jq -r '.result')
           echo "BUILD_RESULT=$BUILD_RESULT" >> $GITHUB_ENV
       
