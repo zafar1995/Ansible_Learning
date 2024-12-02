@@ -14,13 +14,20 @@ jobs:
           RESPONSE=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
             -X POST https://0ed5-103-167-176-239.ngrok-free.app/job/test/build?token=bf0ca22f35774571aa00714e200bd3d7 \
             -i)
+          
+          # Print the response headers for debugging
+          echo "$RESPONSE"
+
+          # Extract the queueId from the Location header
           QUEUE_ID=$(echo "$RESPONSE" | grep -oP '(?<=Location: .*/queue/item/)\d+')
+
           if [ -z "$QUEUE_ID" ]; then
-            echo "Failed to retrieve queue ID"
+            echo "Failed to retrieve queue ID. Response headers: $RESPONSE"
             exit 1
           fi
-          echo "QUEUE_ID=$QUEUE_ID" >> $GITHUB_ENV
+
           echo "Queue ID: $QUEUE_ID"
+          echo "QUEUE_ID=$QUEUE_ID" >> $GITHUB_ENV
 
       - name: "Get Build Number"
         id: get-build-number
@@ -42,23 +49,4 @@ jobs:
         id: wait-for-build
         run: |
           BUILD_URL="https://0ed5-103-167-176-239.ngrok-free.app/job/test/$BUILD_NUMBER"
-          echo "Build URL: $BUILD_URL"
-
-          while true; do
-            BUILD_STATUS=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-              ${BUILD_URL}/api/json | jq -r '.building')
-
-            if [ "$BUILD_STATUS" == "false" ]; then
-              break
-            fi
-            echo "Build is still running..."
-            sleep 10
-          done
-
-          BUILD_RESULT=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-            ${BUILD_URL}/api/json | jq -r '.result')
-
-          echo "BUILD_RESULT=$BUILD_RESULT" >> $GITHUB_ENV
-
-      # - name: "Print Build Result"
-      #   run: echo "Jenkins Build Result: ${{ env.BUILD_RESULT }}"
+          echo "Build URL:
