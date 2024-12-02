@@ -27,16 +27,16 @@ jobs:
 
           echo "Build URL: $BUILD_URL"
 
-          # Poll the build status until it's completed
-          while true; do
-            BUILD_STATUS=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-              ${BUILD_URL}/api/json | jq -r '.building')
-            if [ "$BUILD_STATUS" == "false" ]; then
-              break
-            fi
-            echo "Build is still running..."
-            sleep 10
-          done
+          # # Poll the build status until it's completed
+          # while true; do
+          #   BUILD_STATUS=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+          #     ${BUILD_URL}/api/json | jq -r '.building')
+          #   if [ "$BUILD_STATUS" == "false" ]; then
+          #     break
+          #   fi
+          #   echo "Build is still running..."
+          #   sleep 10
+          # done
 
           BUILD_RESULT=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
             ${BUILD_URL}/api/json | jq -r '.result')
