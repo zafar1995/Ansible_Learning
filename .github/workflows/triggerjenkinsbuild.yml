@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Trigger Jenkins job"
+        id: trigger-job
         uses: umutcolak/jenkins-trigger-job@main
         with:
           jenkins-url: https://0ed5-103-167-176-239.ngrok-free.app/
@@ -17,15 +18,30 @@ jobs:
           job-name: test
           job-params: '{}'
           crumb: b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274
-      
-      - name: Get Jenkins Build Result
-        env:
-          JENKINS_URL: https://0ed5-103-167-176-239.ngrok-free.app/
-          JENKINS_USER: admin
-          JENKINS_TOKEN: bf0ca22f35774571aa00714e200bd3d7
+
+      - name: "Wait for Jenkins Build to Complete"
+        id: wait-for-build
         run: |
-          RESULT=$(curl -s -u $JENKINS_USER:$JENKINS_TOKEN $JENKINS_URL | jq -r '.result')
-          echo "Jenkins build result: $RESULT"
-          if [ "$RESULT" != "SUCCESS" ]; then
-            exit 1
-          fi
+          BUILD_URL=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+            https://0ed5-103-167-176-239.ngrok-free.app/job/test/lastBuild/api/json | jq -r '.url')
+
+          echo "Build URL: $BUILD_URL"
+
+          # Poll the build status until it's completed
+          while true; do
+            BUILD_STATUS=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+              ${BUILD_URL}/api/json | jq -r '.building')
+            if [ "$BUILD_STATUS" == "false" ]; then
+              break
+            fi
+            echo "Build is still running..."
+            sleep 10
+          done
+
+          BUILD_RESULT=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+            ${BUILD_URL}/api/json | jq -r '.result')
+
+          echo "BUILD_RESULT=$BUILD_RESULT" >> $GITHUB_ENV
+
+      - name: "Print Build Result"
+        run: echo "Jenkins Build Result: ${{ env.BUILD_RESULT }}"
