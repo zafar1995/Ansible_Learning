@@ -20,70 +20,43 @@ jobs:
           crumb: b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274
       
       - name: "Get Build Number"
-        run: |
-          # Fetch the queue item and get the executable (build number)
-          QUEUE_URL=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-            https://0ed5-103-167-176-239.ngrok-free.app/job/test/api/json)
-          echo "API Response: $QUEUE_URL"
-          QUEUE_ID=$(echo $QUEUE_URL | jq -r '.lastBuild.queueId')
-          if [ "$QUEUE_ID" == "null" ]; then
-            echo "Failed to fetch queue ID"
-            exit 1
-          fi
-          echo "Queue ID: $QUEUE_ID"
-          while true; do
-            BUILD_NUMBER=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-              https://0ed5-103-167-176-239.ngrok-free.app/queue/item/$QUEUE_ID/api/json | jq -r '.executable.number')
-            if [ "$BUILD_NUMBER" != "null" ]; then
-              echo "Build Number: $BUILD_NUMBER"
-              echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
-              break
-            fi
-            echo "Waiting for the build to start..."
-            sleep 5
-          done
-
-      - name: "Get Build Number"
         id: get-build-number
         run: |
-          # Fetch the queue item and get the executable (build number)
-          QUEUE_URL=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-            https://0ed5-103-167-176-239.ngrok-free.app/job/test/api/json | jq -r '.lastBuild.queueId')
-          echo "Queue ID: $QUEUE_URL"
+          # Fetch the job details to get the latest build number
+          JOB_API_RESPONSE=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+            https://0ed5-103-167-176-239.ngrok-free.app/job/test/api/json)
+          echo "API Response: $JOB_API_RESPONSE"
 
-          while true; do
-            BUILD_NUMBER=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
-              https://0ed5-103-167-176-239.ngrok-free.app/queue/item/$QUEUE_URL/api/json | jq -r '.executable.number')
+          # Extract the latest build number from the job's API response
+          LAST_BUILD_NUMBER=$(echo $JOB_API_RESPONSE | jq -r '.lastBuild.number')
 
-            if [ "$BUILD_NUMBER" != "null" ]; then
-              echo "Build Number: $BUILD_NUMBER"
-              echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
-              break
-            fi
-            echo "Waiting for the build to start..."
-            sleep 5
-          done
+          if [ "$LAST_BUILD_NUMBER" == "null" ]; then
+            echo "Failed to fetch the last build number"
+            exit 1
+          fi
 
+          echo "Last Build Number: $LAST_BUILD_NUMBER"
+          echo "BUILD_NUMBER=$LAST_BUILD_NUMBER" >> $GITHUB_ENV
+          
       - name: "Wait for Jenkins Build to Complete"
         id: wait-for-build
         run: |
           BUILD_URL="https://0ed5-103-167-176-239.ngrok-free.app/job/test/$BUILD_NUMBER"
           echo "Build URL: $BUILD_URL"
-
           # Poll the build status until it's completed
           while true; do
             BUILD_STATUS=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
               ${BUILD_URL}/api/json | jq -r '.building')
-
             if [ "$BUILD_STATUS" == "false" ]; then
               break
             fi
             echo "Build is still running..."
             sleep 10
           done
-
           BUILD_RESULT=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
             ${BUILD_URL}/api/json | jq -r '.result')
+          echo "BUILD_RESULT=$BUILD_RESULT" >> $GITHUB_ENV
+
 
           echo "BUILD_RESULT=$BUILD_RESULT" >> $GITHUB_ENV
 
