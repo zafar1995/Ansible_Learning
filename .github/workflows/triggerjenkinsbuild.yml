@@ -11,7 +11,7 @@ jobs:
       - name: "Trigger Jenkins job"
         uses: umutcolak/jenkins-trigger-job@main
         with:
-          jenkins-url: https://0ed5-103-167-176-239.ngrok-free.app/job/Test/
+          jenkins-url: https://0ed5-103-167-176-239.ngrok-free.app/
           user: admin
           jenkins-token: bf0ca22f35774571aa00714e200bd3d7
           job-name: test
