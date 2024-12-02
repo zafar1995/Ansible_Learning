@@ -1,0 +1,17 @@
+name: QA Automation
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build:
+    name: Build
+    runs-on: self-runner-node
+    steps:
+      - name: "Trigger jenkins job"
+        uses: umutcolak/jenkins-trigger-job@main
+        with:
+          jenkins-url: http://localhost:8080/
+          user: admin
+          jenkins-token: 11fbcd5c331b21367375370ef253153afe
+          job-name: test
