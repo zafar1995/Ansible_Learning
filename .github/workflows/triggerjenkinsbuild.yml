@@ -18,6 +18,30 @@ jobs:
           job-name: test
           job-params: '{}'
           crumb: b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274
+      
+      - name: "Get Build Number"
+        run: |
+          # Fetch the queue item and get the executable (build number)
+          QUEUE_URL=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+            https://0ed5-103-167-176-239.ngrok-free.app/job/test/api/json)
+          echo "API Response: $QUEUE_URL"
+          QUEUE_ID=$(echo $QUEUE_URL | jq -r '.lastBuild.queueId')
+          if [ "$QUEUE_ID" == "null" ]; then
+            echo "Failed to fetch queue ID"
+            exit 1
+          fi
+          echo "Queue ID: $QUEUE_ID"
+          while true; do
+            BUILD_NUMBER=$(curl -s -u admin:bf0ca22f35774571aa00714e200bd3d7 \
+              https://0ed5-103-167-176-239.ngrok-free.app/queue/item/$QUEUE_ID/api/json | jq -r '.executable.number')
+            if [ "$BUILD_NUMBER" != "null" ]; then
+              echo "Build Number: $BUILD_NUMBER"
+              echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
+              break
+            fi
+            echo "Waiting for the build to start..."
+            sleep 5
+          done
 
       - name: "Get Build Number"
         id: get-build-number
