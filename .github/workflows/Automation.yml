@@ -33,4 +33,4 @@ jobs:
         # Trigger the Jenkins job with the dynamically fetched Crumb
         curl -X POST "$JENKINS_URL" \
           --user $JENKINS_USER:$JENKINS_TOKEN \
-          -H "Jenkins-Crumb:$CRUMB" 
+          -H "crumb:$CRUMB" 
