@@ -15,13 +15,13 @@ jobs:
         JENKINS_USER: admin
         JENKINS_TOKEN: bf0ca22f35774571aa00714e200bd3d7
       run: |
-        CRUMB=$(curl -s "$JENKINS_CRUMB_URL" \
-          --user $JENKINS_USER:$JENKINS_TOKEN | jq -r '.crumb')
+        # CRUMB=$(curl -s "$JENKINS_CRUMB_URL" \
+        #   --user $JENKINS_USER:$JENKINS_TOKEN | jq -r '.crumb')
 
         # Trigger the Jenkins job with the Crumb
         curl -X POST "$JENKINS_URL" \
           --user $JENKINS_USER:$JENKINS_TOKEN \
-          -H "Jenkins-Crumb:$CRUMB" 
+          -H "Jenkins-Crumb:b471a76279623f6297a77aa0772231404e7e9f99c6abecc85d617de2e1a80274" 
 
 
       # - name: "Trigger Jenkins job"
