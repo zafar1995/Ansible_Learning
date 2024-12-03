@@ -21,7 +21,8 @@ jobs:
         # Fetch the Jenkins Crumb dynamically
         CRUMB=$(curl -s "$JENKINS_CRUMB_URL" \
           --user $JENKINS_USER:$JENKINS_TOKEN | jq -r '.crumb')
-        
+        echo $CRUMB
+       
         # Ensure CRUMB was successfully fetched
         if [ -z "$CRUMB" ]; then
           echo "Failed to fetch Jenkins Crumb!"
