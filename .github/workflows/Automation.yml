@@ -13,7 +13,7 @@ jobs:
 
     - name: Trigger Jenkins Pipeline with Crumb
       env:
-        JENKINS_URL: https://9c60-103-167-176-239.ngrok-free.app/job/Test/buildWithParameters
+        JENKINS_URL: https://9c60-103-167-176-239.ngrok-free.app/job/Test
         JENKINS_CRUMB_URL: https://9c60-103-167-176-239.ngrok-free.app/crumbIssuer/api/json
         JENKINS_USER: admin
         JENKINS_TOKEN: bf0ca22f35774571aa00714e200bd3d7
